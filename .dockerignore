@@ -1,0 +1,43 @@
+# Git & VCS
+.git/
+.gitignore
+.gitattributes
+
+# Environments & Local Keys
+.env
+.env.*
+!.env.example
+
+# Python cache & virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.npm/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+sentinelx_dev.db
+sentinelx_test.db
+
+# Documentation & IDE
+.vscode/
+.idea/
+*.md
+!README.md
+docs/
+.agents/

@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinelx"
+version = "1.0.0"
+description = "Modular Cybersecurity Platform (Collect -> Detect -> Correlate -> Investigate -> Prioritize -> Respond -> Report)"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "SentinelX Engineering Team" }
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*", "contracts*", "modules*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "node_modules",
+    "dist",
+    "build",
+    "scratch",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+]
+ignore = [
+    "E501", # line too long (handled by line-length formatter)
+    "B008", # do not perform function calls in argument defaults (standard for FastAPI Depends)
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-v --strict-markers"
+testpaths = ["tests"]
+pythonpath = [".", "backend"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

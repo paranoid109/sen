@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & virtualenvs
+.env
+.env.local
+.env.*.local
+.venv/
+venv/
+ENV/
+env/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+sentinelx_dev.db
+sentinelx_test.db
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+build/
+.npm
+*.tsbuildinfo
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs & Temp
+*.log
+logs/
+tmp/
+scratch/

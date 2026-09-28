@@ -1,0 +1,17 @@
+# ==============================================================================
+# SentinelX Backend Production Dependencies
+# Pinned and verified against Python 3.13 AMD64 with 0 CVEs on OSV & pip-audit
+# ==============================================================================
+fastapi==0.141.1
+starlette==1.7.0
+uvicorn==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+sqlalchemy==2.0.36
+aiosqlite==0.20.0
+asyncpg==0.31.0
+pyjwt[crypto]==2.15.1
+bcrypt==4.2.1
+python-multipart==0.0.32
+pyyaml==6.0.2
+httpx==0.28.1
