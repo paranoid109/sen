@@ -15,3 +15,5 @@ bcrypt==4.2.1
 python-multipart==0.0.32
 pyyaml==6.0.2
 httpx==0.28.1
+alembic==1.20.0
+greenlet==3.5.1

@@ -1,0 +1,11 @@
+id: RULE-TI-001
+name: Threat Intelligence IOC Match Detected
+description: Detects network or host traffic matching known adversary infrastructure or C2 indicators.
+severity: high
+mitre_attack_id: T1071
+window_seconds: 60
+threshold: 1
+match:
+  event_type: threat_intel_match
+group_by:
+  - source_ip

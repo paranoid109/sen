@@ -1,0 +1,13 @@
+id: RULE-CLOUD-001
+name: Cloud Infrastructure Misconfiguration & Public Exposure
+description: Detects public cloud storage exposure, IAM privilege escalation, or permissive perimeter security rules across AWS, GCP, or Azure.
+severity: high
+mitre_attack_id: T1530
+window_seconds: 60
+threshold: 1
+match:
+  event_type: cloud_misconfiguration_finding
+  patterns:
+    - "(?i)(RULE-CLOUD|s3_public_bucket|iam_wildcard|nsg_open_ingress|storage_allusers|cloud_misconfiguration)"
+group_by:
+  - target_host

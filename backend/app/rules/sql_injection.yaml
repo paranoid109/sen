@@ -1,0 +1,19 @@
+id: RULE-WEB-001
+name: SQL Injection Attack Detected
+description: Detects SQL injection exploit patterns within incoming HTTP request payloads or URIs.
+severity: high
+mitre_attack_id: T1190
+window_seconds: 60
+threshold: 1
+match:
+  event_type: web_request
+  patterns:
+    - "(?i)(union\\s+all\\s+select|union\\s+select)"
+    - "(?i)(\\bselect\\b.*\\bfrom\\b)"
+    - "(?i)(\\bor\\b\\s+['\"]?\\d+['\"]?\\s*=\\s*['\"]?\\d+)"
+    - "(?i)('\\s*or\\s*'1'\\s*=\\s*'1)"
+    - "(?i)(exec(\\s|\\+)+(s|x)p\\w+)"
+    - "(?i)(--|#|/\\*).*$"
+    - "(?i)(';\\s*drop\\s+table)"
+group_by:
+  - source_ip

@@ -1,0 +1,13 @@
+id: RULE-GRAPH-001
+name: Attack Path Lateral Movement / Crown Jewel Exposure
+description: Detects lateral movement attack path or blast radius exposure to Crown Jewel assets identified by Module X8.
+severity: critical
+mitre_attack_id: T1021
+window_seconds: 60
+threshold: 1
+match:
+  event_type: graph_finding
+  patterns:
+    - "(?i)(RULE-GRAPH-BLAST-RADIUS|crown_jewel|lateral_path|attack_path)"
+group_by:
+  - source_ip

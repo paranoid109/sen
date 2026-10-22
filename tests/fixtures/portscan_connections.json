@@ -1,0 +1,110 @@
+[
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 21,
+    "source_port": 49152,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:01Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 22,
+    "source_port": 49153,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:02Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 23,
+    "source_port": 49154,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:03Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 25,
+    "source_port": 49155,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:04Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 80,
+    "source_port": 49156,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:05Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 110,
+    "source_port": 49157,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:06Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 139,
+    "source_port": 49158,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:07Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 443,
+    "source_port": 49159,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:08Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 445,
+    "source_port": 49160,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:09Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 1433,
+    "source_port": 49161,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:10Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 3306,
+    "source_port": 49162,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:11Z"
+  },
+  {
+    "source_ip": "192.168.1.200",
+    "destination_ip": "192.168.1.10",
+    "destination_port": 8080,
+    "source_port": 49163,
+    "event_type": "connection",
+    "target_host": "server-prod-01",
+    "event_time": "2026-10-07T14:00:12Z"
+  }
+]

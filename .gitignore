@@ -48,3 +48,20 @@ Thumbs.db
 logs/
 tmp/
 scratch/
+
+# Trackers & Internal Notes
+track/
+docs/interview/
+
+# Planning & Implementation Blueprints
+SENTINELX_ARCHITECTURE_BLUEPRINT.html
+SENTINELX_IMPLEMENTATION_PLAN.html
+SENTINELX_IMPLEMENTATION_PLAN.md
+
+# Agent Protocols & Governance
+.agents/
+AGENTS.md
+
+# Temporary Screenshots & Media
+03_alerts_queue.png
+

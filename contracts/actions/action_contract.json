@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sentinelx.io/schemas/action_contract.json",
+  "title": "SentinelX Action Contract",
+  "description": "Standard response action contract for notifications and remediation actions (M6/M7, X10)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique UUIDv4 identifier of the action"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "webhook_notification",
+        "block_ip",
+        "isolate_host",
+        "disable_user",
+        "custom"
+      ],
+      "description": "Classification of the remediation or notification action"
+    },
+    "incident_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID of the correlated incident triggering this action"
+    },
+    "target": {
+      "type": "string",
+      "description": "Target entity for the action (e.g. IP address, hostname, URL, or username)"
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Arbitrary key-value configuration parameters passed to the action handler",
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "EXECUTING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "description": "Execution lifecycle state of the action"
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "Identifier of the actor or system triggering the action"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the action was requested"
+    },
+    "executed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "UTC timestamp when action execution completed or terminated"
+    },
+    "result": {
+      "type": ["object", "string", "null"],
+      "description": "Execution output, return payload, or failure details"
+    }
+  },
+  "required": [
+    "action_id",
+    "action_type",
+    "incident_id",
+    "target",
+    "status",
+    "requested_by",
+    "requested_at"
+  ]
+}

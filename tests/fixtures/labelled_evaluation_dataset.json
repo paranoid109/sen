@@ -1,0 +1,622 @@
+{
+  "metadata": {
+    "version": "2.4.0",
+    "description": "SentinelX Labelled Evaluation Dataset for Multi-Domain Detection Benchmarking (Phases 1-7)",
+    "generated_for": "Academic & Operational Evaluation (Steps 7-12)",
+    "scenario_count": 25,
+    "total_events": 67
+  },
+  "scenarios": [
+    {
+      "scenario_id": "BENIGN-AUTH-01",
+      "category": "benign_auth",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.1.10",
+      "description": "Single isolated failed SSH login (user typo)",
+      "events": [
+        {
+          "event_id": "e001-01",
+          "source_ip": "10.0.1.10",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 22,
+          "source_port": 51001,
+          "event_type": "auth_failed",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:00:00Z",
+          "raw_payload": "Oct  7 10:00:00 server-prod-01 sshd[1001]: Failed password for john from 10.0.1.10 port 51001 ssh2",
+          "details": {"user": "john", "service": "sshd"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-AUTH-02",
+      "category": "benign_auth",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.1.20",
+      "description": "Near-threshold failed SSH logins (3 attempts in 60s, threshold is 5)",
+      "events": [
+        {
+          "event_id": "e002-01",
+          "source_ip": "10.0.1.20",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 22,
+          "source_port": 51010,
+          "event_type": "auth_failed",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:05:01Z",
+          "raw_payload": "Oct  7 10:05:01 server-prod-01 sshd[1010]: Failed password for alice from 10.0.1.20 port 51010 ssh2",
+          "details": {"user": "alice", "service": "sshd"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        },
+        {
+          "event_id": "e002-02",
+          "source_ip": "10.0.1.20",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 22,
+          "source_port": 51011,
+          "event_type": "auth_failed",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:05:05Z",
+          "raw_payload": "Oct  7 10:05:05 server-prod-01 sshd[1011]: Failed password for alice from 10.0.1.20 port 51011 ssh2",
+          "details": {"user": "alice", "service": "sshd"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        },
+        {
+          "event_id": "e002-03",
+          "source_ip": "10.0.1.20",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 22,
+          "source_port": 51012,
+          "event_type": "auth_failed",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:05:10Z",
+          "raw_payload": "Oct  7 10:05:10 server-prod-01 sshd[1012]: Failed password for alice from 10.0.1.20 port 51012 ssh2",
+          "details": {"user": "alice", "service": "sshd"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-NET-01",
+      "category": "benign_network",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.2.10",
+      "description": "Routine health monitor check (ports 80 and 443)",
+      "events": [
+        {
+          "event_id": "e003-01",
+          "source_ip": "10.0.2.10",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 80,
+          "source_port": 52001,
+          "event_type": "connection",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:10:01Z",
+          "raw_payload": "TCP SYN 10.0.2.10:52001 -> 192.168.1.10:80",
+          "details": {"protocol": "tcp", "state": "syn_sent"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        },
+        {
+          "event_id": "e003-02",
+          "source_ip": "10.0.2.10",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 443,
+          "source_port": 52002,
+          "event_type": "connection",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T10:10:02Z",
+          "raw_payload": "TCP SYN 10.0.2.10:52002 -> 192.168.1.10:443",
+          "details": {"protocol": "tcp", "state": "syn_sent"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-NET-02",
+      "category": "benign_network",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.2.20",
+      "description": "Multi-service client session (5 distinct ports over 20s, below threshold 10)",
+      "events": [
+        {"event_id": "e004-01", "source_ip": "10.0.2.20", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 52101, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T10:15:01Z", "raw_payload": "TCP 80", "details": {}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e004-02", "source_ip": "10.0.2.20", "destination_ip": "192.168.1.10", "destination_port": 443, "source_port": 52102, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T10:15:03Z", "raw_payload": "TCP 443", "details": {}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e004-03", "source_ip": "10.0.2.20", "destination_ip": "192.168.1.10", "destination_port": 8080, "source_port": 52103, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T10:15:05Z", "raw_payload": "TCP 8080", "details": {}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e004-04", "source_ip": "10.0.2.20", "destination_ip": "192.168.1.10", "destination_port": 8443, "source_port": 52104, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T10:15:07Z", "raw_payload": "TCP 8443", "details": {}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e004-05", "source_ip": "10.0.2.20", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 52105, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T10:15:09Z", "raw_payload": "TCP 22", "details": {}, "label": "benign", "attack_type": null, "expected_rule_id": null}
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-WEB-01",
+      "category": "benign_web",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.3.10",
+      "description": "Standard user web navigation",
+      "events": [
+        {"event_id": "e005-01", "source_ip": "10.0.3.10", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53001, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:20:01Z", "raw_payload": "GET / HTTP/1.1", "details": {"method": "GET", "uri": "/", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e005-02", "source_ip": "10.0.3.10", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53002, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:20:05Z", "raw_payload": "GET /about.html HTTP/1.1", "details": {"method": "GET", "uri": "/about.html", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e005-03", "source_ip": "10.0.3.10", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53003, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:20:10Z", "raw_payload": "POST /contact.html HTTP/1.1", "details": {"method": "POST", "uri": "/contact.html", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null}
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-WEB-02",
+      "category": "benign_web",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.3.20",
+      "description": "Near-match benign web requests (strings with SQL-like keywords but harmless semantics)",
+      "events": [
+        {"event_id": "e006-01", "source_ip": "10.0.3.20", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53101, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:25:01Z", "raw_payload": "GET /search?q=select+your+country HTTP/1.1", "details": {"method": "GET", "uri": "/search?q=select+your+country", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e006-02", "source_ip": "10.0.3.20", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53102, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:25:04Z", "raw_payload": "GET /catalog?category=books&order=desc HTTP/1.1", "details": {"method": "GET", "uri": "/catalog?category=books&order=desc", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null},
+        {"event_id": "e006-03", "source_ip": "10.0.3.20", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 53103, "event_type": "web_request", "target_host": "server-prod-01", "event_time": "2026-10-07T10:25:08Z", "raw_payload": "GET /authors?name=O'Connor HTTP/1.1", "details": {"method": "GET", "uri": "/authors?name=O'Connor", "status_code": 200}, "label": "benign", "attack_type": null, "expected_rule_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-AUTH-01",
+      "category": "ssh_brute_force",
+      "label": "attack",
+      "expected_rule_id": "RULE-AUTH-001",
+      "source_ip": "192.168.10.101",
+      "description": "SSH Brute-Force authentication attempt (6 failed logins within 25 seconds)",
+      "events": [
+        {"event_id": "e101-01", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61001, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:01Z", "raw_payload": "Oct  7 11:00:01 server-prod-01 sshd[2001]: Failed password for root from 192.168.10.101 port 61001 ssh2", "details": {"user": "root", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e101-02", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61002, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:05Z", "raw_payload": "Oct  7 11:00:05 server-prod-01 sshd[2002]: Failed password for admin from 192.168.10.101 port 61002 ssh2", "details": {"user": "admin", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e101-03", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61003, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:10Z", "raw_payload": "Oct  7 11:00:10 server-prod-01 sshd[2003]: Failed password for user from 192.168.10.101 port 61003 ssh2", "details": {"user": "user", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e101-04", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61004, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:15Z", "raw_payload": "Oct  7 11:00:15 server-prod-01 sshd[2004]: Failed password for test from 192.168.10.101 port 61004 ssh2", "details": {"user": "test", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e101-05", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61005, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:20Z", "raw_payload": "Oct  7 11:00:20 server-prod-01 sshd[2005]: Failed password for guest from 192.168.10.101 port 61005 ssh2", "details": {"user": "guest", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e101-06", "source_ip": "192.168.10.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 61006, "event_type": "auth_failed", "target_host": "server-prod-01", "event_time": "2026-10-07T11:00:25Z", "raw_payload": "Oct  7 11:00:25 server-prod-01 sshd[2006]: Failed password for oracle from 192.168.10.101 port 61006 ssh2", "details": {"user": "oracle", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"}
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-AUTH-02",
+      "category": "ssh_brute_force",
+      "label": "attack",
+      "expected_rule_id": "RULE-AUTH-001",
+      "source_ip": "192.168.10.102",
+      "description": "Rapid credential dictionary attack on database host (6 failed logins within 18s)",
+      "events": [
+        {"event_id": "e102-01", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61101, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:01Z", "raw_payload": "Oct  7 11:05:01 db-prod-01 sshd[2101]: Failed password for postgres from 192.168.10.102 port 61101 ssh2", "details": {"user": "postgres", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e102-02", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61102, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:04Z", "raw_payload": "Oct  7 11:05:04 db-prod-01 sshd[2102]: Failed password for dbadmin from 192.168.10.102 port 61102 ssh2", "details": {"user": "dbadmin", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e102-03", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61103, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:07Z", "raw_payload": "Oct  7 11:05:07 db-prod-01 sshd[2103]: Failed password for root from 192.168.10.102 port 61103 ssh2", "details": {"user": "root", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e102-04", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61104, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:10Z", "raw_payload": "Oct  7 11:05:10 db-prod-01 sshd[2104]: Failed password for backup from 192.168.10.102 port 61104 ssh2", "details": {"user": "backup", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e102-05", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61105, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:14Z", "raw_payload": "Oct  7 11:05:14 db-prod-01 sshd[2105]: Failed password for deploy from 192.168.10.102 port 61105 ssh2", "details": {"user": "deploy", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"},
+        {"event_id": "e102-06", "source_ip": "192.168.10.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 61106, "event_type": "auth_failed", "target_host": "db-prod-01", "event_time": "2026-10-07T11:05:18Z", "raw_payload": "Oct  7 11:05:18 db-prod-01 sshd[2106]: Failed password for superuser from 192.168.10.102 port 61106 ssh2", "details": {"user": "superuser", "service": "sshd"}, "label": "attack", "attack_type": "ssh_brute_force", "expected_rule_id": "RULE-AUTH-001"}
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-NET-01",
+      "category": "port_scan",
+      "label": "attack",
+      "expected_rule_id": "RULE-NET-001",
+      "source_ip": "192.168.20.101",
+      "description": "TCP Port Reconnaissance Scan (12 distinct destination ports within 15 seconds)",
+      "events": [
+        {"event_id": "e201-01", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 21, "source_port": 62001, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:01Z", "raw_payload": "TCP SYN probe port 21", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-02", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 22, "source_port": 62002, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:02Z", "raw_payload": "TCP SYN probe port 22", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-03", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 23, "source_port": 62003, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:03Z", "raw_payload": "TCP SYN probe port 23", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-04", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 25, "source_port": 62004, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:04Z", "raw_payload": "TCP SYN probe port 25", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-05", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 53, "source_port": 62005, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:05Z", "raw_payload": "TCP SYN probe port 53", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-06", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 80, "source_port": 62006, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:06Z", "raw_payload": "TCP SYN probe port 80", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-07", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 110, "source_port": 62007, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:07Z", "raw_payload": "TCP SYN probe port 110", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-08", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 139, "source_port": 62008, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:08Z", "raw_payload": "TCP SYN probe port 139", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-09", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 443, "source_port": 62009, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:09Z", "raw_payload": "TCP SYN probe port 443", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-10", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 445, "source_port": 62010, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:10Z", "raw_payload": "TCP SYN probe port 445", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-11", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 1433, "source_port": 62011, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:11Z", "raw_payload": "TCP SYN probe port 1433", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e201-12", "source_ip": "192.168.20.101", "destination_ip": "192.168.1.10", "destination_port": 3306, "source_port": 62012, "event_type": "connection", "target_host": "server-prod-01", "event_time": "2026-10-07T11:10:12Z", "raw_payload": "TCP SYN probe port 3306", "details": {"protocol": "tcp"}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"}
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-NET-02",
+      "category": "port_scan",
+      "label": "attack",
+      "expected_rule_id": "RULE-NET-001",
+      "source_ip": "192.168.20.102",
+      "description": "Nmap Service Discovery Scan (11 distinct ports within 12 seconds)",
+      "events": [
+        {"event_id": "e202-01", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 80, "source_port": 62101, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:01Z", "raw_payload": "TCP SYN 80", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-02", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 443, "source_port": 62102, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:02Z", "raw_payload": "TCP SYN 443", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-03", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 5432, "source_port": 62103, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:03Z", "raw_payload": "TCP SYN 5432", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-04", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 3306, "source_port": 62104, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:04Z", "raw_payload": "TCP SYN 3306", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-05", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 1433, "source_port": 62105, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:05Z", "raw_payload": "TCP SYN 1433", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-06", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 1521, "source_port": 62106, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:06Z", "raw_payload": "TCP SYN 1521", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-07", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 27017, "source_port": 62107, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:07Z", "raw_payload": "TCP SYN 27017", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-08", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 6379, "source_port": 62108, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:08Z", "raw_payload": "TCP SYN 6379", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-09", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 9200, "source_port": 62109, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:09Z", "raw_payload": "TCP SYN 9200", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-10", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 22, "source_port": 62110, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:10Z", "raw_payload": "TCP SYN 22", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"},
+        {"event_id": "e202-11", "source_ip": "192.168.20.102", "destination_ip": "192.168.1.20", "destination_port": 21, "source_port": 62111, "event_type": "connection", "target_host": "db-prod-01", "event_time": "2026-10-07T11:15:11Z", "raw_payload": "TCP SYN 21", "details": {}, "label": "attack", "attack_type": "port_scan", "expected_rule_id": "RULE-NET-001"}
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-WEB-01",
+      "category": "sql_injection",
+      "label": "attack",
+      "expected_rule_id": "RULE-WEB-001",
+      "source_ip": "192.168.30.101",
+      "description": "SQL Injection exploitation: UNION SELECT data exfiltration attempt",
+      "events": [
+        {
+          "event_id": "e301-01",
+          "source_ip": "192.168.30.101",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 80,
+          "source_port": 63001,
+          "event_type": "web_request",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T11:20:01Z",
+          "raw_payload": "GET /products.php?id=1%20UNION%20SELECT%20null,username,password%20FROM%20users HTTP/1.1",
+          "details": {"method": "GET", "uri": "/products.php?id=1 UNION SELECT null,username,password FROM users", "status_code": 200},
+          "label": "attack",
+          "attack_type": "sql_injection",
+          "expected_rule_id": "RULE-WEB-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-WEB-02",
+      "category": "sql_injection",
+      "label": "attack",
+      "expected_rule_id": "RULE-WEB-001",
+      "source_ip": "192.168.30.102",
+      "description": "SQL Injection authentication bypass: Tautology OR 1=1",
+      "events": [
+        {
+          "event_id": "e302-01",
+          "source_ip": "192.168.30.102",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 80,
+          "source_port": 63002,
+          "event_type": "web_request",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T11:25:01Z",
+          "raw_payload": "POST /api/v1/login HTTP/1.1 payload: username=admin' OR '1'='1",
+          "details": {"method": "POST", "uri": "/api/v1/login", "body": "username=admin' OR '1'='1", "status_code": 200},
+          "label": "attack",
+          "attack_type": "sql_injection",
+          "expected_rule_id": "RULE-WEB-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-WEB-03",
+      "category": "sql_injection",
+      "label": "attack",
+      "expected_rule_id": "RULE-WEB-001",
+      "source_ip": "192.168.30.103",
+      "description": "SQL Injection destructive stacked query: DROP TABLE with comment delimiter",
+      "events": [
+        {
+          "event_id": "e303-01",
+          "source_ip": "192.168.30.103",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 80,
+          "source_port": 63003,
+          "event_type": "web_request",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T11:30:01Z",
+          "raw_payload": "GET /search.php?q=test'; DROP TABLE users;-- HTTP/1.1",
+          "details": {"method": "GET", "uri": "/search.php?q=test'; DROP TABLE users;--", "status_code": 500},
+          "label": "attack",
+          "attack_type": "sql_injection",
+          "expected_rule_id": "RULE-WEB-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-DNS-01",
+      "category": "benign_network",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.4.10",
+      "description": "Standard internal network flow summary without tunneling signatures",
+      "events": [
+        {
+          "event_id": "e401-01",
+          "source_ip": "10.0.4.10",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 53,
+          "source_port": 54111,
+          "event_type": "network_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:00:01Z",
+          "raw_payload": "DNS IN A api.internal.local from 10.0.4.10",
+          "details": {"query": "api.internal.local", "status": "NOERROR"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "BENIGN-EDR-01",
+      "category": "benign_endpoint",
+      "label": "benign",
+      "expected_rule_id": null,
+      "source_ip": "10.0.5.10",
+      "description": "Routine administrative package check without LOLBAS or FIM violation",
+      "events": [
+        {
+          "event_id": "e402-01",
+          "source_ip": "10.0.5.10",
+          "destination_ip": "192.168.1.10",
+          "destination_port": null,
+          "source_port": null,
+          "event_type": "endpoint_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:05:01Z",
+          "raw_payload": "PROCESS EXEC: /usr/bin/uptime",
+          "details": {"command_line": "/usr/bin/uptime", "user": "ops"},
+          "label": "benign",
+          "attack_type": null,
+          "expected_rule_id": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-NET-DNS-01",
+      "category": "dns_tunneling",
+      "label": "attack",
+      "expected_rule_id": "RULE-NET-002",
+      "source_ip": "192.168.40.101",
+      "description": "High-entropy DNS Tunneling exfiltration query (T1071.004)",
+      "events": [
+        {
+          "event_id": "e501-01",
+          "source_ip": "192.168.40.101",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 53,
+          "source_port": 55101,
+          "event_type": "network_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:10:01Z",
+          "raw_payload": "DNS IN A v1-0-4-3-d98a2f7c00192e44b8a1c902e88a.tunnel.evilcorp.com",
+          "details": {"rule_id": "RULE-NET-DNS-001", "mitre_attack_id": "T1071.004", "technique": "DNS Tunneling"},
+          "label": "attack",
+          "attack_type": "dns_tunneling",
+          "expected_rule_id": "RULE-NET-002"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-EDR-FIM-01",
+      "category": "endpoint_tampering",
+      "label": "attack",
+      "expected_rule_id": "RULE-EDR-001",
+      "source_ip": "192.168.50.101",
+      "description": "Unauthorized FIM modification of /etc/sudoers (T1565.001)",
+      "events": [
+        {
+          "event_id": "e502-01",
+          "source_ip": "192.168.50.101",
+          "destination_ip": "192.168.1.10",
+          "destination_port": null,
+          "source_port": null,
+          "event_type": "endpoint_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:15:01Z",
+          "raw_payload": "File Integrity Tampering Detected: /etc/sudoers modified",
+          "details": {"rule_id": "RULE-EDR-FIM-001", "mitre_attack_id": "T1565.001", "path": "/etc/sudoers"},
+          "label": "attack",
+          "attack_type": "endpoint_tampering",
+          "expected_rule_id": "RULE-EDR-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-EDR-LOLBAS-01",
+      "category": "endpoint_lolbas",
+      "label": "attack",
+      "expected_rule_id": "RULE-EDR-002",
+      "source_ip": "192.168.50.102",
+      "description": "Encoded PowerShell LOLBAS execution (T1059.001)",
+      "events": [
+        {
+          "event_id": "e503-01",
+          "source_ip": "192.168.50.102",
+          "destination_ip": "192.168.1.10",
+          "destination_port": null,
+          "source_port": null,
+          "event_type": "endpoint_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:20:01Z",
+          "raw_payload": "PROCESS EXEC: powershell.exe -NoProfile -enc SQBFAFgA",
+          "details": {"rule_id": "RULE-EDR-PS-001", "mitre_attack_id": "T1059.001"},
+          "label": "attack",
+          "attack_type": "endpoint_lolbas",
+          "expected_rule_id": "RULE-EDR-002"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-TI-01",
+      "category": "threat_intel",
+      "label": "attack",
+      "expected_rule_id": "RULE-TI-001",
+      "source_ip": "198.51.100.250",
+      "description": "Known APT29 Command and Control IP IOC match (T1071)",
+      "events": [
+        {
+          "event_id": "e504-01",
+          "source_ip": "198.51.100.250",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 443,
+          "source_port": 56100,
+          "event_type": "threat_intel_match",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:25:01Z",
+          "raw_payload": "Threat Intel IOC Match: 198.51.100.250 attributed to APT29",
+          "details": {"rule_id": "RULE-TI-MATCH-001", "threat_actor": "APT29", "confidence": 95},
+          "label": "attack",
+          "attack_type": "threat_intel",
+          "expected_rule_id": "RULE-TI-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-VULN-01",
+      "category": "vulnerability_kev",
+      "label": "attack",
+      "expected_rule_id": "RULE-VULN-001",
+      "source_ip": "192.168.60.101",
+      "description": "Actively exploited CISA KEV CVE-2021-44228 Log4Shell identified on critical asset (T1190)",
+      "events": [
+        {
+          "event_id": "e505-01",
+          "source_ip": "192.168.60.101",
+          "destination_ip": "192.168.1.20",
+          "destination_port": null,
+          "source_port": null,
+          "event_type": "vulnerability_finding",
+          "target_host": "db-prod-01",
+          "event_time": "2026-10-07T12:30:01Z",
+          "raw_payload": "Vulnerability CVE-2021-44228 in log4j-core:2.14.1 (CVSS: 10.0 [CISA-KEV])",
+          "details": {"cve_id": "CVE-2021-44228", "cisa_kev": true, "cvss_score": 10.0},
+          "label": "attack",
+          "attack_type": "vulnerability_kev",
+          "expected_rule_id": "RULE-VULN-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-ML-01",
+      "category": "ml_anomaly",
+      "label": "attack",
+      "expected_rule_id": "RULE-ML-001",
+      "source_ip": "192.168.70.101",
+      "description": "UEBA off-hours access with high-Z volume spike and Isolation Forest outlier (T1078)",
+      "events": [
+        {
+          "event_id": "e601-01",
+          "source_ip": "192.168.70.101",
+          "destination_ip": "192.168.1.20",
+          "destination_port": 5432,
+          "source_port": 51200,
+          "event_type": "ml_anomaly",
+          "target_host": "db-prod-01",
+          "event_time": "2026-10-07T03:15:01Z",
+          "raw_payload": "Off-hours access detected at 03:15 UTC; Statistically anomalous data volume (Z-Score: 4.364); Isolation Forest outlier (0.7765)",
+          "details": {"rule_id": "RULE-ML-ANOMALY", "volume_z_score": 4.364, "isolation_forest_score": 0.7765},
+          "label": "attack",
+          "attack_type": "ml_anomaly",
+          "expected_rule_id": "RULE-ML-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-GRAPH-01",
+      "category": "graph_blast_radius",
+      "label": "attack",
+      "expected_rule_id": "RULE-GRAPH-001",
+      "source_ip": "192.168.80.101",
+      "description": "Lateral movement attack path to crown jewel database identified via Knowledge Graph (T1021)",
+      "events": [
+        {
+          "event_id": "e701-01",
+          "source_ip": "192.168.80.101",
+          "destination_ip": "192.168.1.20",
+          "destination_port": 5432,
+          "source_port": 53100,
+          "event_type": "graph_finding",
+          "target_host": "db-prod-01",
+          "event_time": "2026-10-07T12:40:01Z",
+          "raw_payload": "RULE-GRAPH-BLAST-RADIUS: Lateral path discovered exposing Crown Jewel db-prod-01 via server-prod-01",
+          "details": {"rule_id": "RULE-GRAPH-BLAST-RADIUS", "hop_count": 2, "crown_jewels_at_risk": 1, "mitre_attack_id": "T1021"},
+          "label": "attack",
+          "attack_type": "graph_blast_radius",
+          "expected_rule_id": "RULE-GRAPH-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-RISK-01",
+      "category": "risk_escalation",
+      "label": "attack",
+      "expected_rule_id": "RULE-RISK-001",
+      "source_ip": "192.168.90.101",
+      "description": "Multi-factor dynamic risk score escalation incorporating CISA KEV and Crown Jewel reachability (T1190)",
+      "events": [
+        {
+          "event_id": "e702-01",
+          "source_ip": "192.168.90.101",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 443,
+          "source_port": 54200,
+          "event_type": "risk_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:45:01Z",
+          "raw_payload": "RULE-RISK-DYNAMIC-ESCALATION: Dynamic Risk Escalation for asset server-prod-01: Score 100/100 (CRITICAL)",
+          "details": {"rule_id": "RULE-RISK-DYNAMIC-ESCALATION", "risk_score": 100, "risk_tier": "critical", "mitre_attack_id": "T1190"},
+          "label": "attack",
+          "attack_type": "risk_escalation",
+          "expected_rule_id": "RULE-RISK-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-FORENSICS-01",
+      "category": "forensics_triage",
+      "label": "attack",
+      "expected_rule_id": "RULE-FORENSICS-001",
+      "source_ip": "127.0.0.1",
+      "description": "Digital forensics acquisition discovering reverse shell process and C2 agent (T1059.004)",
+      "events": [
+        {
+          "event_id": "e801-01",
+          "source_ip": "127.0.0.1",
+          "destination_ip": "198.51.100.4",
+          "destination_port": 4444,
+          "source_port": 48290,
+          "event_type": "forensics_triage_package",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:50:01Z",
+          "raw_payload": "RULE-FORENSICS-TRIAGE-001: Forensic package acquired for server-prod-01 with reverse_shell and c2_agent connection",
+          "details": {"rule_id": "RULE-FORENSICS-TRIAGE-001", "mitre_attack_id": "T1059.004", "suspicious_processes": 1, "root_sha256": "0e08742a74adf6f9b8c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4"},
+          "label": "attack",
+          "attack_type": "forensics_triage",
+          "expected_rule_id": "RULE-FORENSICS-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "ATTACK-CLOUD-01",
+      "category": "cloud_misconfiguration",
+      "label": "attack",
+      "expected_rule_id": "RULE-CLOUD-001",
+      "source_ip": "192.168.100.101",
+      "description": "Cloud infrastructure misconfiguration with S3 bucket public access and IAM privilege escalation (T1530)",
+      "events": [
+        {
+          "event_id": "e901-01",
+          "source_ip": "192.168.100.101",
+          "destination_ip": "192.168.1.10",
+          "destination_port": 443,
+          "source_port": 55300,
+          "event_type": "cloud_misconfiguration_finding",
+          "target_host": "server-prod-01",
+          "event_time": "2026-10-07T12:55:01Z",
+          "raw_payload": "RULE-CLOUD-001: Cloud Infrastructure Misconfiguration: S3 bucket s3_public_bucket customer-data exposed to AllUsers",
+          "details": {"rule_id": "RULE-CLOUD-001", "benchmark_control": "CIS-AWS-2.1.1", "provider": "aws", "mitre_attack_id": "T1530"},
+          "label": "attack",
+          "attack_type": "cloud_misconfiguration",
+          "expected_rule_id": "RULE-CLOUD-001"
+        }
+      ]
+    }
+  ]
+}

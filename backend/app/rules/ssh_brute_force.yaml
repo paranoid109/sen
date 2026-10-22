@@ -1,0 +1,11 @@
+id: RULE-AUTH-001
+name: SSH Brute-Force Authentication Attempt
+description: Detects multiple failed SSH authentication attempts from a single source IP within a sliding time window.
+severity: high
+mitre_attack_id: T1110
+window_seconds: 60
+threshold: 5
+match:
+  event_type: auth_failed
+group_by:
+  - source_ip

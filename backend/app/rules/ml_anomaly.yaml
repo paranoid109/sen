@@ -1,0 +1,13 @@
+id: RULE-ML-001
+name: ML Behavioral Anomaly / UEBA Outlier Detected
+description: Detects statistical volume spikes, off-hours access, or Isolation Forest multidimensional outliers identified by Module X6.
+severity: high
+mitre_attack_id: T1078
+window_seconds: 60
+threshold: 1
+match:
+  event_type: ml_anomaly
+  patterns:
+    - "(?i)(Off-hours access|volume_anomaly|isolation_outlier|high_entropy|RULE-ML-ANOMALY)"
+group_by:
+  - source_ip

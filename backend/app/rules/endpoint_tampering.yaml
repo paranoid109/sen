@@ -1,0 +1,13 @@
+id: RULE-EDR-001
+name: Endpoint File Integrity Tampering Detected
+description: Detects unauthorized modifications or deletions of critical system configuration files.
+severity: critical
+mitre_attack_id: T1565.001
+window_seconds: 60
+threshold: 1
+match:
+  event_type: endpoint_finding
+  patterns:
+    - "(?i)(RULE-EDR-FIM|File Integrity Tampering|T1565\\.001)"
+group_by:
+  - source_ip

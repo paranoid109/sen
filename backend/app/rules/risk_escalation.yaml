@@ -1,0 +1,13 @@
+id: RULE-RISK-001
+name: Dynamic Multi-Factor Quantitative Risk Escalation
+description: Detects composite multi-factor dynamic risk escalation (Score >= 80) computed by Module X9.
+severity: critical
+mitre_attack_id: T1190
+window_seconds: 60
+threshold: 1
+match:
+  event_type: risk_finding
+  patterns:
+    - "(?i)(RULE-RISK-DYNAMIC-ESCALATION|dynamic_risk|Dynamic Risk Escalation)"
+group_by:
+  - source_ip

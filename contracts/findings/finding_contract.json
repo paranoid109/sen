@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sentinelx.io/schemas/finding_contract.json",
+  "title": "SentinelX Finding Contract",
+  "description": "Standard finding artifact emitted by standalone capability modules (X1-X13)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique UUIDv4 identifier of the finding"
+    },
+    "tool_name": {
+      "type": "string",
+      "description": "Name of the capability tool producing the finding (e.g. web_security_analyzer)"
+    },
+    "rule_id": {
+      "type": "string",
+      "description": "Identifier of the rule or signature triggered"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Finding severity classification"
+    },
+    "target": {
+      "type": "string",
+      "description": "Target URI, IP, or hostname investigated"
+    },
+    "description": {
+      "type": "string",
+      "description": "Summary of the security finding"
+    },
+    "evidence": {
+      "type": ["object", "string", "null"],
+      "description": "Extracted evidence payload or metadata"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the finding was generated"
+    },
+    "mitre_attack_id": {
+      "type": ["string", "null"],
+      "description": "Associated MITRE ATT&CK technique ID (e.g. T1190)"
+    }
+  },
+  "required": [
+    "finding_id",
+    "tool_name",
+    "rule_id",
+    "severity",
+    "target",
+    "description",
+    "timestamp"
+  ]
+}

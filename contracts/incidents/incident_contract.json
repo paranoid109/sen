@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sentinelx.io/schemas/incident_contract.json",
+  "title": "SentinelX Incident Contract",
+  "description": "Correlated security incident aggregating alerts by monitored target asset with closed-form risk score (M6)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "incident_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique UUIDv4 identifier of the incident"
+    },
+    "title": {
+      "type": "string",
+      "description": "Incident title summarizing the threat"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Detailed incident narrative and context"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Overall incident severity rating"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["OPEN", "INVESTIGATING", "RESOLVED", "CLOSED"],
+      "description": "Lifecycle state of the incident"
+    },
+    "risk_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Closed-form bounded risk score (0 to 100)"
+    },
+    "target_asset_id": {
+      "type": ["string", "null"],
+      "description": "UUID of the monitored victim CMDB asset"
+    },
+    "target_host": {
+      "type": ["string", "null"],
+      "description": "Victim hostname or IP"
+    },
+    "alert_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of alert UUIDs correlated under this incident"
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": ["timestamp", "event_type", "description", "source"]
+      },
+      "description": "Chronological audit timeline of incident activity"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC incident creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC last updated timestamp"
+    }
+  },
+  "required": [
+    "incident_id",
+    "title",
+    "severity",
+    "status",
+    "risk_score",
+    "alert_ids",
+    "created_at",
+    "updated_at"
+  ]
+}

@@ -1,0 +1,13 @@
+id: RULE-NET-002
+name: DNS Tunneling / Exfiltration Detected
+description: Detects suspicious high-entropy DNS queries or network findings matching DNS tunneling.
+severity: high
+mitre_attack_id: T1071.004
+window_seconds: 60
+threshold: 1
+match:
+  event_type: network_finding
+  patterns:
+    - "(?i)(RULE-NET-DNS-001|DNS Tunneling|T1071\\.004)"
+group_by:
+  - source_ip

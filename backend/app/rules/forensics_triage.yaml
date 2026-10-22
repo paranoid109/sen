@@ -1,0 +1,13 @@
+id: RULE-FORENSICS-001
+name: Suspicious Process / C2 Shell In Forensic Package
+description: Detects interactive shell execution or C2 network socket identified during digital forensics acquisition.
+severity: critical
+mitre_attack_id: T1059.004
+window_seconds: 60
+threshold: 1
+match:
+  event_type: forensics_triage_package
+  patterns:
+    - "(?i)(RULE-FORENSICS-TRIAGE|reverse_shell|c2_agent|triage_package)"
+group_by:
+  - target_host

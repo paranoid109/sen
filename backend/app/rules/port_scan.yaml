@@ -1,0 +1,12 @@
+id: RULE-NET-001
+name: TCP Port Scan Detected
+description: Detects an external host probing 10 or more distinct destination ports within a sliding time window.
+severity: medium
+mitre_attack_id: T1046
+window_seconds: 30
+threshold: 10
+match:
+  event_type: connection
+  distinct: destination_port
+group_by:
+  - source_ip
