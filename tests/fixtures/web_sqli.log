@@ -1,0 +1,6 @@
+192.168.1.50 - - [07/Oct/2026:12:30:00 +0000] "GET /index.html HTTP/1.1" 200 1024 "-" "Mozilla/5.0"
+192.168.1.150 - - [07/Oct/2026:12:30:01 +0000] "GET /products.php?id=1%20UNION%20SELECT%20null,username,password%20FROM%20users HTTP/1.1" 200 4523 "-" "sqlmap/1.8"
+192.168.1.50 - - [07/Oct/2026:12:30:02 +0000] "GET /about.html HTTP/1.1" 200 2048 "-" "Mozilla/5.0"
+192.168.1.150 - - [07/Oct/2026:12:30:05 +0000] "POST /login.php HTTP/1.1" 200 1250 "-" "Mozilla/5.0"
+192.168.1.150 - - [07/Oct/2026:12:30:10 +0000] "GET /api/users?name=admin'%20OR%20'1'='1 HTTP/1.1" 200 3500 "-" "Mozilla/5.0"
+192.168.1.150 - - [07/Oct/2026:12:30:15 +0000] "GET /search.php?q=test';%20DROP%20TABLE%20users;-- HTTP/1.1" 500 230 "-" "curl/8.0"

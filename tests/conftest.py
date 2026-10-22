@@ -14,7 +14,6 @@ from typing import Any
 import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import event, text
-from sqlalchemy.engine import Engine
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -52,12 +51,13 @@ async def test_engine(
             connect_args={"check_same_thread": False, "timeout": 30},
         )
 
-        @event.listens_for(Engine, "connect")
+        @event.listens_for(engine.sync_engine, "connect")
         def set_sqlite_pragma(dbapi_connection: Any, connection_record: Any) -> None:
-            cursor = dbapi_connection.cursor()
-            cursor.execute("PRAGMA foreign_keys=ON")
-            cursor.execute("PRAGMA journal_mode=WAL")
-            cursor.close()
+            if "sqlite" in type(dbapi_connection).__module__:
+                cursor = dbapi_connection.cursor()
+                cursor.execute("PRAGMA foreign_keys=ON")
+                cursor.execute("PRAGMA journal_mode=WAL")
+                cursor.close()
 
     session_factory = async_sessionmaker(
         bind=engine,

@@ -11,7 +11,6 @@ from datetime import UTC, datetime
 from typing import Any
 
 from sqlalchemy import event, types
-from sqlalchemy.engine import Engine
 from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
     AsyncEngine,
@@ -78,12 +77,13 @@ def create_engine_and_session(
     )
 
     if is_sqlite:
-        # Enforce foreign key constraints on SQLite connections
-        @event.listens_for(Engine, "connect")
+        # Enforce foreign key constraints on SQLite connections only
+        @event.listens_for(engine.sync_engine, "connect")
         def set_sqlite_pragma(dbapi_connection: Any, connection_record: Any) -> None:
-            cursor = dbapi_connection.cursor()
-            cursor.execute("PRAGMA foreign_keys=ON")
-            cursor.close()
+            if "sqlite" in type(dbapi_connection).__module__:
+                cursor = dbapi_connection.cursor()
+                cursor.execute("PRAGMA foreign_keys=ON")
+                cursor.close()
 
     session_factory = async_sessionmaker(
         bind=engine,

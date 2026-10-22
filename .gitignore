@@ -45,6 +45,7 @@ Thumbs.db
 
 # Logs & Temp
 *.log
+!tests/fixtures/*.log
 logs/
 tmp/
 scratch/
